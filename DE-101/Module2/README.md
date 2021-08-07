@@ -19,12 +19,12 @@
 <p><a target="_blank" rel="noopener noreferrer" href="https://github.com/Oleg-Loginov-analyst/Analytics/blob/main/DE-101/Module2/Physical%20model.png"><img src="https://github.com/Oleg-Loginov-analyst/Analytics/blob/main/DE-101/Module2/Physical%20model.png" alt="Физическая модель" /></a></p>
 <h2>Создаём БД в Google BigQuery и загружаем данные</h2>
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>Создаем учетную запись в AWS.</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>Создаем учетную запись в Google Cloud.</li>
 <li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>Используя сервис AWS RDS создаём БД PostgreSQL и настраиваем к ней доступ.</li>
 <li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>Подключаемся к новой БД через SQL клиент (DBeaver) и загружаем данные из модуля 2.3 (Superstore dataset):
 <ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>В staging (схема БД stg) &mdash;<span>&nbsp;</span><a href="https://github.com/a2say/DE-101/blob/main/Module02/stg.orders.sql">stg.orders.sql</a></li>
-<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>В Business Layer (схема БД dw) &mdash;<span>&nbsp;</span><a href="https://github.com/a2say/DE-101/blob/main/Module02/from_stg_to_dw.sql">from_stg_to_dw.sql</a></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>В staging (схема БД stg) &mdash;<span>&nbsp;</span><a href="https://github.com/Oleg-Loginov-analyst/Analytics/blob/main/DE-101/Module2/stg.orders.sql">stg.orders.sql</a></li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="disabled" class="task-list-item-checkbox" checked="checked" /><span>&nbsp;</span>В Business Layer (схема БД dw) &mdash;<span>&nbsp;</span><a href="https://github.com/Oleg-Loginov-analyst/Analytics/blob/main/DE-101/Module2/from_stg_to_dw.sql">from_stg_to_dw.sql</a></li>
 </ul>
 </li>
 </ul>
