@@ -4,7 +4,7 @@
 -- create sales_fact table
 -- match number of rows between public and dw (business layer)
 
-create schema dw;
+CREATE SCHEMA dw;
 
 -- ************************************** calendar_dim
 DROP TABLE IF EXISTS dw.calendar_dim CASCADE;
