@@ -1,3 +1,11 @@
+-- create schema
+-- create dim tables (calendar, customer, people, geography, product, shipping)
+-- fix data quality problem
+-- create sales_fact table
+-- match number of rows between public and dw (business layer)
+
+create schema dw;
+
 -- ************************************** calendar_dim
 DROP TABLE IF EXISTS dw.calendar_dim CASCADE;
 CREATE TABLE dw.calendar_dim
