@@ -11,24 +11,38 @@ CREATE TABLE films (
 
 
 CREATE TABLE total_sales_tbl AS 
-SELECT c.country,
+SELECT
+    c.country,
     c.city,
     sum(od.unit_price * od.quantity::double precision) AS sum
-   FROM orders o
-     JOIN order_details od ON o.order_id = od.order_id
-     JOIN customers c ON o.customer_id = c.customer_id
-  GROUP BY c.country, c.city;
+FROM
+    orders o
+JOIN
+    order_details od ON o.order_id = od.order_id
+JOIN
+    customers c ON o.customer_id = c.customer_id
+GROUP BY
+    c.country,
+    c.city;
 
   
-CREATE TABLE total_sales_tbl AS 
-SELECT c.country,
+CREATE TABLE
+    total_sales_tbl AS 
+SELECT
+    c.country,
     c.city,
     sum(od.unit_price * od.quantity::double precision) AS sum
-   FROM orders o
-     JOIN order_details od ON o.order_id = od.order_id
-     JOIN customers c ON o.customer_id = c.customer_id
-  GROUP BY c.country, c.city
-  WITH NO DATA;
+FROM
+    orders o
+JOIN
+    order_details od
+        ON o.order_id = od.order_id
+JOIN
+    customers c ON o.customer_id = c.customer_id
+GROUP BY
+    c.country,
+    c.city
+    WITH NO DATA;
   
   
 CREATE TEMP TABLE total_sales_tbl AS 
@@ -41,16 +55,22 @@ SELECT c.country,
   GROUP BY c.country, c.city;
 
   
-CREATE OR REPLACE VIEW public.v_total_sales
-AS SELECT c.country,
+CREATE OR REPLACE VIEW public.v_total_sales AS
+SELECT
+    c.country,
     c.city,
     sum(od.unit_price * od.quantity) AS sales
-   FROM orders o
-     JOIN order_details od ON o.order_id = od.order_id
-     JOIN customers c ON o.customer_id = c.customer_id
-  GROUP BY c.country, c.city;
+FROM
+    orders o
+JOIN
+    order_details od ON o.order_id = od.order_id
+JOIN
+    customers c ON o.customer_id = c.customer_id
+GROUP BY
+    c.country,
+    c.city;
   
-  SELECT country, city, sales FROM v_total_sales vts
+SELECT country, city, sales FROM v_total_sales vts
   
   
 CREATE materialized VIEW public.vm_total_sales
@@ -63,12 +83,10 @@ AS SELECT c.country,
   GROUP BY c.country, c.city;
   
   
-  REFRESH MATERIALIZED VIEW vm_total_sales;
-  
-  
-  TRUNCATE TABLE total_sales_tbl;
-  
-  DROP TABLE total_sales_tbl;
+REFRESH MATERIALIZED VIEW vm_total_sales;
+ 
+TRUNCATE TABLE total_sales_tbl;
+DROP TABLE total_sales_tbl;
   
   
 SELECT
@@ -76,10 +94,15 @@ SELECT
     c.country
 FROM
     customers c
-JOIN orders o ON c.customer_id = o.customer_id
-JOIN order_details od ON o.order_id = od.order_id
-WHERE EXTRACT(YEAR FROM o.order_date) = 1996 
-GROUP BY 1,2
+JOIN
+    orders o
+        ON c.customer_id = o.customer_id
+JOIN
+    order_details od ON o.order_id = od.order_id
+WHERE
+    EXTRACT(YEAR FROM o.order_date) = 1996 
+GROUP BY
+    1,2
 
 EXCEPT
 
@@ -150,7 +173,7 @@ GROUP BY ship_country, ship_city
 
 SELECT * FROM orders o 
 WHERE (ship_country, ship_city) IN (
-SELECT country, city -- можно не указывать DISTINCT. Дубли игнорируются
+SELECT country, city -- Г¬Г®Г¦Г­Г® Г­ГҐ ГіГЄГ Г§Г»ГўГ ГІГј DISTINCT. Г„ГіГЎГ«ГЁ ГЁГЈГ­Г®Г°ГЁГ°ГіГѕГІГ±Гї
     FROM customers c
     WHERE country IN ('USA', 'UK')
 )
@@ -230,7 +253,7 @@ FROM
 grouped
 
 
-/* Рассчитаем ранги продаж. Для этого нам нужно будет указать порядок */
+/* ГђГ Г±Г±Г·ГЁГІГ ГҐГ¬ Г°Г Г­ГЈГЁ ГЇГ°Г®Г¤Г Г¦. Г„Г«Гї ГЅГІГ®ГЈГ® Г­Г Г¬ Г­ГіГ¦Г­Г® ГЎГіГ¤ГҐГІ ГіГЄГ Г§Г ГІГј ГЇГ®Г°ГїГ¤Г®ГЄ */
 SELECT
     EXTRACT( QUARTER FROM o.order_date),
     EXTRACT( MONTH FROM o.order_date),
@@ -335,9 +358,9 @@ SELECT
     city,
     sales,
     CASE sales
-        WHEN max(sales) OVER () THEN 'Лучший результат'
-        WHEN min(sales) OVER () THEN 'Худший результат'
-        ELSE 'Средний результат'
+        WHEN max(sales) OVER () THEN 'Г‹ГіГ·ГёГЁГ© Г°ГҐГ§ГіГ«ГјГІГ ГІ'
+        WHEN min(sales) OVER () THEN 'Г•ГіГ¤ГёГЁГ© Г°ГҐГ§ГіГ«ГјГІГ ГІ'
+        ELSE 'Г‘Г°ГҐГ¤Г­ГЁГ© Г°ГҐГ§ГіГ«ГјГІГ ГІ'
     END AS result
 FROM total_sales_tbl
 ORDER BY sales DESC;
