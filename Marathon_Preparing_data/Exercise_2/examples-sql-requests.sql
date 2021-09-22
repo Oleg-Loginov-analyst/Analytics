@@ -70,7 +70,7 @@ GROUP BY
     c.country,
     c.city;
   
-SELECT country, city, sales FROM v_total_sales vts
+SELECT country, city, sales FROM v_total_sales vts;
   
   
 CREATE materialized VIEW public.vm_total_sales
@@ -114,7 +114,7 @@ FROM
 JOIN orders o ON c.customer_id = o.customer_id
 JOIN order_details od ON o.order_id = od.order_id
 WHERE EXTRACT(YEAR FROM o.order_date) = 1997
-GROUP BY 1,2
+GROUP BY 1,2;
 
 SELECT
     employee_id,
@@ -122,7 +122,7 @@ SELECT
     first_name,
     hire_date
 FROM
-    employees e
+    employees e;
 
 SELECT max(hire_date) FROM employees;
   
@@ -135,7 +135,7 @@ SELECT
     hire_date
 FROM
     employees e
-WHERE hire_date = '1994-11-15'
+WHERE hire_date = '1994-11-15';
 
 SELECT
     employee_id,
@@ -144,7 +144,7 @@ SELECT
     hire_date
 FROM
     employees e
-WHERE hire_date = (SELECT max(hire_date) FROM employees)
+WHERE hire_date = (SELECT max(hire_date) FROM employees);
 
 
 SELECT
@@ -155,9 +155,7 @@ SELECT
 FROM
     customers c
 WHERE
-    country IN (
-        'USA', 'UK'
-    )
+    country IN ('USA', 'UK');
 
     
 --
@@ -168,7 +166,7 @@ WHERE customer_id IN (
     FROM customers c
     WHERE country IN ('USA', 'UK')
 )
-GROUP BY ship_country, ship_city
+GROUP BY ship_country, ship_city;
 
 
 SELECT * FROM orders o 
@@ -176,7 +174,7 @@ WHERE (ship_country, ship_city) IN (
 SELECT country, city -- ìîæíî íå óêàçûâàòü DISTINCT. Äóáëè èãíîðèðóþòñÿ
     FROM customers c
     WHERE country IN ('USA', 'UK')
-)
+);
 
 
 SELECT customer_id, company_name 
@@ -184,7 +182,7 @@ FROM customers c
 WHERE EXISTS(
     SELECT 1 FROM orders o
     WHERE o.customer_id = c.customer_id
-    AND o.order_date >='1998-04-01')
+    AND o.order_date >='1998-04-01');
 
 
 SELECT 
@@ -200,7 +198,7 @@ FROM (
     JOIN orders o ON o.order_id = od.order_id
     GROUP BY 1, 2
 ) as sales_data
-WHERE YEAR = 1998
+WHERE YEAR = 1998;
 
 
 
@@ -217,7 +215,7 @@ SELECT
     MONTH,
     sales
 FROM sales_data
-WHERE YEAR = 1998
+WHERE YEAR = 1998;
 
 
 SELECT
@@ -230,7 +228,7 @@ SELECT
 FROM order_details od
 JOIN orders o ON o.order_id = od.order_id
 WHERE EXTRACT(YEAR FROM o.order_date) = 1997
-GROUP BY 1, 2, 3
+GROUP BY 1, 2, 3;
 
 WITH grouped AS (
 SELECT
@@ -250,10 +248,10 @@ SELECT
     max(sales) OVER () AS max_sales,
     max(sales) OVER ( PARTITION BY quarter) AS max_sales_quarter
 FROM 
-grouped
+grouped;
 
 
-/* Ðàññ÷èòàåì ðàíãè ïðîäàæ. Äëÿ ýòîãî íàì íóæíî áóäåò óêàçàòü ïîðÿäîê */
+--Рассчитаем ранги продаж. Для этого нам нужно будет указать порядок
 SELECT
     EXTRACT( QUARTER FROM o.order_date),
     EXTRACT( MONTH FROM o.order_date),
@@ -269,7 +267,7 @@ JOIN order_details od ON
 WHERE
     EXTRACT(YEAR FROM o.order_date)= 1996
 GROUP BY 1,2
-ORDER BY EXTRACT( MONTH FROM o.order_date)
+ORDER BY EXTRACT( MONTH FROM o.order_date);
 
 
 SELECT 
@@ -280,7 +278,7 @@ SELECT
 FROM orders o
 JOIN order_details od ON o.order_id = od.order_id
 GROUP BY 1
-ORDER BY 1
+ORDER BY 1;
 
 
 WITH sales_data AS (
@@ -291,7 +289,7 @@ SELECT
     ROW_NUMBER() OVER(ORDER BY sales desc) AS rn_sales_desc,
     RANK() OVER(ORDER BY sales desc) AS rnk_sales_desc,
     DENSE_RANK() OVER(ORDER BY sales desc) AS dense_rnk_sales_desc
-FROM sales_data
+FROM sales_data;
 
 WITH sales_data AS (
 SELECT UNNEST AS sales FROM unnest(ARRAY[5, 10,20,30,25,10])
@@ -301,9 +299,7 @@ SELECT
     ROW_NUMBER() OVER(ORDER BY sales ) AS rn_sales_desc,
     RANK() OVER(ORDER BY sales ) AS rnk_sales_desc,
     DENSE_RANK() OVER(ORDER BY sales ) AS dense_rnk_sales_desc
-FROM sales_data
-
-
+FROM sales_data;
 
 
 WITH sales_data AS (
@@ -324,7 +320,8 @@ SELECT
 FROM sales_data)
 SELECT * 
 FROM sales_ranks
-WHERE rnk_sales_by_country = 1
+WHERE rnk_sales_by_country = 1;
+
 
 CREATE TABLE total_sales_tbl AS 
 SELECT c.country,
@@ -346,12 +343,11 @@ SELECT
 FROM total_sales_tbl
 ORDER BY sales DESC;
 
-SELECT *
+SELECT
+    *
 FROM 
     unnest(ARRAY[5,10,20,30,25,10]) t1, 
     unnest(ARRAY[5,10,20,30,25,10]) t2
-
-
 
 SELECT  
     country,
@@ -380,7 +376,7 @@ SELECT
     sales,
     sum(sales) over(PARTITION BY year ORDER BY month) AS rolling_sum,
     avg(sales) over(ORDER BY YEAR, MONTH ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS rolling_3mon_avg_sales
-FROM sales_data
+FROM sales_data;
 
 
 WITH sales_data AS (
@@ -413,7 +409,7 @@ SELECT
     lag(sales, 12) over(ORDER BY YEAR, month) AS prev_year_month_sales,
     sales - lag(sales, 12) over(ORDER BY YEAR, month) AS sales_diff,
     lead(sales, 1) over(ORDER BY YEAR, month) AS next_month_sales
-FROM unioned
+FROM unioned;
 
 SELECT 
     t1 AS mon,
@@ -421,17 +417,17 @@ SELECT
     0 AS sales
 FROM 
     unnest(ARRAY[1,2,3,4,5,6]) t1, 
-    unnest(ARRAY[1996,1997]) t2
+    unnest(ARRAY[1996,1997]) t2;
 
     
 SELECT country, city, SUM(sales)
 FROM v_total_sales vts
-GROUP BY ROLLUP(country, city)
+GROUP BY ROLLUP(country, city);
 
 
 SELECT country, city, SUM(sales)
 FROM v_total_sales vts
-GROUP BY CUBE(country, city)
+GROUP BY CUBE(country, city);
 
 
 SELECT 
@@ -439,4 +435,4 @@ SELECT
     city,
     SUM(sales)
 FROM v_total_sales
-GROUP BY GROUPING SETS((country),(city), ())
+GROUP BY GROUPING SETS((country),(city), ());
