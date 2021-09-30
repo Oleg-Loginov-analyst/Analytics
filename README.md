@@ -1,2 +1,2 @@
 # Analytics
-Analytical work and research
+Business analyst, bi analyst, data engineer
