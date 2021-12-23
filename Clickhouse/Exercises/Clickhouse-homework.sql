@@ -7,13 +7,13 @@
 число уникальных кампаний. */
 
 SELECT
-	toDate(time) AS day,
+    toDate(time) AS day,
     countIf(event = 'view') AS views,
     countIf(event = 'click') AS clicks,
     uniq(ad_id) AS uniq_ad_id,
     uniq(campaign_union_id) AS uniq_campaign_union_id
 FROM
-	ads_data
+    ads_data
 GROUP BY
     day;
 
@@ -56,21 +56,21 @@ CTR — это отношение всех кликов объявлений к 
 Ответ: Да, различаются */
 
 SELECT
-       ad_id,
-       count(ad_id) AS count_ad_id,
-       countIf(event = 'view') AS views,
-       countIf(event = 'click') AS clicks,
-       countIf(event = 'click') / countIf(event = 'view') AS ctr,
-       avg(event = 'click') / avg(event = 'view') AS ctr_avg,
-       median(event = 'click') / median(event = 'view') AS ctr_med
+    ad_id,
+    count(ad_id) AS count_ad_id,
+    countIf(event = 'view') AS views,
+    countIf(event = 'click') AS clicks,
+    countIf(event = 'click') / countIf(event = 'view') AS ctr,
+    avg(event = 'click') / avg(event = 'view') AS ctr_avg,
+    median(event = 'click') / median(event = 'view') AS ctr_med
 FROM
-       ads_data
+    ads_data
 GROUP BY
-       ad_id
+    ad_id
 ORDER BY
-       clicks DESC
+    clicks DESC
 LIMIT
-       10;
+    10;
 
 /* Задача 4
 Похоже, в наших логах есть баг, объявления приходят с кликами, но без показов!
