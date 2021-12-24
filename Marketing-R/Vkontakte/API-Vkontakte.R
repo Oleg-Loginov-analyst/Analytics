@@ -23,9 +23,6 @@ options(gargle_oauth_email = "name@gmail.com")
 # Запрос списка доступных рекламных кабинетов
 my_vk_acc <- vkGetAdAccounts(access_token = myToken$access_token)
 
-# accounts <- vkGetAdAccounts()
-
-
 # Получаем список рекламных кампаний
 vk_camp <- vkGetAdCampaigns(account_id   = 1111111111, # указываем id рекламного аккаунта 
                             access_token = myToken$access_token)
