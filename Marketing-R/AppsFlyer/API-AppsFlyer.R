@@ -19,7 +19,7 @@ library(RJDBC)
 options(gargle_oauth_email = "loginovod90@gmail.com")
 
 # Устанавливаем токен
-af_set_api_token("7a4463d4-be8d-40e2-9b83-c7f4d9bb8894")
+af_set_api_token("00000000-0000-0000-0000-000000000000")
 
 # Получение агрегированных данных по дням и по географии
 geo_by_date_report <- af_get_aggregate_data(
