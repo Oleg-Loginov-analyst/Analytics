@@ -54,9 +54,9 @@ geo_by_date_report$Date = as.Date(geo_by_date_report$Date)
 
 # Загружаем данные в BigQuery
 # Агрегированные данные по дням и по географии
-bq_table(project = "flawless-age-310013",                  # название проекта
-         dataset = "aflyer_dataset",                       # название датасета (набор данных)
-         table   = "geo_camp_stat") %>%                    # название таблицы
+bq_table(project = "project-name",                  # название проекта
+         dataset = "dataset-name",                         # название датасета (набор данных)
+         table   = "table-name") %>%                       # название таблицы
   bq_table_upload(values = geo_by_date_report,             # загружаемый датасет из вышесозданного кода
                   create_disposition = "CREATE_IF_NEEDED", # Создание ноовый таблицы
                   write_disposition  = "WRITE_TRUNCATE")   # Перезаписать данные в таблице
