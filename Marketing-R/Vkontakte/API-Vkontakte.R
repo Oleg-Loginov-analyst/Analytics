@@ -124,7 +124,7 @@ vk_camp_stat_city_overall <- rename(vk_camp_stat_city_overall, id_camp_stat_city
 bq_table(project = "project-name",                         # название проекта
          dataset = "dataset-name",                         # название датасета (набор данных)
          table   = "table-name") %>%                       # название таблицы
-  bq_table_upload(values = vk_camp,                        # загружаемый датасет из вышенаписанного кода
+  bq_table_upload(values             = vk_camp,            # загружаемый датасет из вышенаписанного кода
                   create_disposition = "CREATE_IF_NEEDED", # Создание ноовый таблицы
                   write_disposition  = "WRITE_TRUNCATE")   # Перезаписать данные в таблице
 
@@ -133,7 +133,7 @@ bq_table(project = "project-name",                         # название п
 bq_table(project = "project-name",
          dataset = "dataset-name",
          table   = "table-name") %>%
-  bq_table_upload(values = vk_camp_stat,
+  bq_table_upload(values             = vk_camp_stat,
                   create_disposition = "CREATE_IF_NEEDED",
                   write_disposition  = "WRITE_TRUNCATE")
 
@@ -141,6 +141,6 @@ bq_table(project = "project-name",
 bq_table(project = "project-name",
          dataset = "dataset-name",
          table   = "table-name") %>%
-  bq_table_upload(values = vk_post_reach_camp,
+  bq_table_upload(values             = vk_post_reach_camp,
                   create_disposition = "CREATE_IF_NEEDED",
                   write_disposition  = "WRITE_TRUNCATE")
