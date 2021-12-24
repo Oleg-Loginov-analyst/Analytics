@@ -16,7 +16,7 @@ library(DBI)
 library(RJDBC)
 
 # Электронная почта, к которой привязан токен
-options(gargle_oauth_email = "loginovod90@gmail.com")
+options(gargle_oauth_email = "name@gmail.com")
 
 # Устанавливаем токен
 af_set_api_token("00000000-0000-0000-0000-000000000000")
@@ -35,7 +35,7 @@ geo_by_date_report <- af_get_aggregate_data(
                         "contributor2_match_type",
                         "contributor3_match_type",
                         "match_type"),
-  app_id            = "ru.name.name") # id вашего приложения в AppsFlyer
+  app_id            =   "ru.name.name") # id вашего приложения в AppsFlyer
 
 # Убираем NA, переименовываем колонки, приводим дату к нужному формату 
 geo_by_date_report[is.na(geo_by_date_report)] <- 0
