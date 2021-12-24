@@ -24,7 +24,7 @@ options(gargle_oauth_email = "name@gmail.com")
 my_vk_acc <- vkGetAdAccounts(access_token = myToken$access_token)
 
 # Получаем список рекламных кампаний
-vk_camp <- vkGetAdCampaigns(account_id   = 1111111111, # указываем id рекламного аккаунта 
+vk_camp <- vkGetAdCampaigns(account_id   = 1111111111, # Указываем id рекламного аккаунта 
                             access_token = myToken$access_token)
 
 # Переименовываем колонки id и name
@@ -36,7 +36,7 @@ vk_camp_act <- filter(vk_camp, status == "кампания запущена")
 
 
 # Получаем список объявлений
-vk_ads <- vkGetAds(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_ads <- vkGetAds(account_id   = 1111111111, # Указываем id рекламного аккаунта
                    access_token = myToken$access_token)
 
 # Фильтруем по активным объявлениям
@@ -44,7 +44,7 @@ vk_ads_act <- filter(vk_ads, status == "объявление запущено")
 
 
 # Получаем список объявлений с описанием их внешнего вида
-vk_ads_vid <- vkGetAdsLayout(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_ads_vid <- vkGetAdsLayout(account_id   = 1111111111, # Указываем id рекламного аккаунта
                              access_token = myToken$access_token)
 
 # Переименовываем колонки campaign_id и id
@@ -56,7 +56,7 @@ vk_ads_vid$id_ads_vid = as.integer(vk_ads_vid$id_ads_vid)
 
 
 # Получить статистику показателей эффективности по рекламным кампаниям
-vk_camp_stat <- vkGetAdStatistics(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_camp_stat <- vkGetAdStatistics(account_id   = 1111111111, # Указываем id рекламного аккаунта
                                   ids_type     = "campaign",
                                   ids          = vk_camp_act$id_camp,
                                   period       = "day",
@@ -74,7 +74,7 @@ na.omit(vk_camp_stat) %>%
     unique()
 
 # Получить статистику показателей эффективности по рекламным объявлениям
-vk_ads_stat <- vkGetAdStatistics(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_ads_stat <- vkGetAdStatistics(account_id   = 1111111111, # Указываем id рекламного аккаунта
                                   ids_type     = "ad",
                                   ids          = vk_ads_act$id,
                                   period       = "day",
@@ -82,7 +82,7 @@ vk_ads_stat <- vkGetAdStatistics(account_id   = 1111111111, # указываем
                                   access_token = myToken$access_token)
 
 # Получаем данные по охвату в разрезе рекламных кампаний
-vk_post_reach_camp <- vkGetAdPostsReach(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_post_reach_camp <- vkGetAdPostsReach(account_id   = 1111111111, # Указываем id рекламного аккаунта
                                         ids_type     = "campaign",
                                         ids          = vk_camp_act$id_camp,
                                         access_token = myToken$access_token)
@@ -91,7 +91,7 @@ vk_post_reach_camp <- vkGetAdPostsReach(account_id   = 1111111111, # указы�
 vk_post_reach_camp <- rename(vk_post_reach_camp, id_post_reach = id)
 
 # Получить подробную статистику по охвату рекламных записей из объявлений и кампаний для продвижения записей сообщества
-vk_post_reach_ads <- vkGetAdPostsReach(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_post_reach_ads <- vkGetAdPostsReach(account_id   = 1111111111, # Указываем id рекламного аккаунта
                                        ids_type     = "ad",
                                        ids          = vk_ads_act$id,
                                        access_token = myToken$access_token)
@@ -100,7 +100,7 @@ vk_post_reach_ads <- vkGetAdPostsReach(account_id   = 1111111111, # указыв
 vk_camp_stat_city_month$name[is.na(vk_camp_stat_city_month$name)] <- 'Not identified'
 
 # Получаем статистику по охвату аудитории по рекламным кампаним в разрезе городов
-vk_camp_stat_city_overall <- vkGetAdCityStats(account_id   = 1111111111, # указываем id рекламного аккаунта
+vk_camp_stat_city_overall <- vkGetAdCityStats(account_id   = 1111111111, # Указываем id рекламного аккаунта
                                               ids_type     = "campaign",
                                               id           = vk_camp$id_camp ,
                                               period       = 'overall',
@@ -121,10 +121,10 @@ vk_camp_stat_city_overall <- rename(vk_camp_stat_city_overall, id_camp_stat_city
 
 # Загружаем данные в BigQuery
 # Список рекламных кампаний
-bq_table(project = "project-name",                         # название проекта
-         dataset = "dataset-name",                         # название датасета (набор данных)
-         table   = "table-name") %>%                       # название таблицы
-  bq_table_upload(values             = vk_camp,            # загружаемый датасет из вышенаписанного кода
+bq_table(project = "project-name",                         # Название проекта
+         dataset = "dataset-name",                         # Название датасета (набор данных)
+         table   = "table-name") %>%                       # Название таблицы
+  bq_table_upload(values             = vk_camp,            # Загружаемый датасет из вышенаписанного кода
                   create_disposition = "CREATE_IF_NEEDED", # Создание ноовый таблицы
                   write_disposition  = "WRITE_TRUNCATE")   # Перезаписать данные в таблице
 
