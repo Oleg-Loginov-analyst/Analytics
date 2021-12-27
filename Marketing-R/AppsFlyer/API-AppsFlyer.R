@@ -37,9 +37,11 @@ geo_by_date_report <- af_get_aggregate_data(
                         "match_type"),
   app_id            =   "ru.name.name") # id вашего приложения в AppsFlyer
 
-# Убираем NA, переименовываем колонки, приводим дату к нужному формату 
+# Убираем NA
 geo_by_date_report[is.na(geo_by_date_report)] <- 0
 geo_by_date_report <- geo_by_date_report[, -3]
+
+# Переименовываем колонки
 geo_by_date_report <- rename(geo_by_date_report, Medium_source        = `Media Source (pid)`)
 geo_by_date_report <- rename(geo_by_date_report, Campaign             = `Campaign (c)`)
 geo_by_date_report <- rename(geo_by_date_report, Conversion_rate      = `Conversion Rate`)
@@ -48,6 +50,8 @@ geo_by_date_report <- rename(geo_by_date_report, Loyal_users_installs = `Loyal U
 geo_by_date_report <- rename(geo_by_date_report, Total_revenue        = `Total Revenue`)
 geo_by_date_report <- rename(geo_by_date_report, Total_cost           = `Total Cost`)
 geo_by_date_report <- rename(geo_by_date_report, Average_eCPI         = `Average eCPI`)
+
+# Приводим дату к нужному формату
 geo_by_date_report$Date = as.Date(geo_by_date_report$Date)
 
 # Подключаемся в БД Google BigQuery
