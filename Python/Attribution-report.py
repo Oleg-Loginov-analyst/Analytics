@@ -1,11 +1,9 @@
-Сравнение моделей атрибуции Data-Driven vs Last click
-
 # Подключение библиотек
 import pandas as pd
 import numpy  as np
 
 # Считываем данные
-df_month = pd.read_csv('путь-к-файлу\\file.csv', sep      = ',', skiprows = 5)
+df_month = pd.read_csv('путь-к-файлу\\file.csv', sep = ',', skiprows = 5)
 
 # Переименовываем нужные колонки
 df_month.rename(columns = {'MCF Channel Grouping'       : 'MCF_Channel_Grouping',
@@ -31,8 +29,8 @@ df_month['Last_Click']  = df_month['Last_Click'].str.replace(',' ,'').astype(flo
 df_month['Data_Driven'] = df_month['Data_Driven'].str.replace(',' ,'').astype(float)
 
 # Прописываем условие для разделения источников/каналов на группы
-df_month.loc[(df_month['MCF_Channel_Grouping'] == 'Direct')   			   |
-             (df_month['MCF_Channel_Grouping'] == 'Referral') 			   |
+df_month.loc[(df_month['MCF_Channel_Grouping'] == 'Direct')   		   |
+             (df_month['MCF_Channel_Grouping'] == 'Referral') 		   |
              (df_month['MCF_Channel_Grouping'] == 'Organic Search')    , 'Group_channel'] = 'Органика'
 df_month.loc[df_month['MCF_Channel_Grouping']  == 'Email'              , 'Group_channel'] = 'Рассылки'
 df_month.loc[df_month['MCF_Channel_Grouping']  == '(Other)'            , 'Group_channel'] = 'Рассылки'
