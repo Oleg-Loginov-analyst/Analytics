@@ -1,2 +1,2 @@
 # Analytics
-Business analyst, bi analyst, data engineer
+Data analyst | BI engineer | Data engineer
