@@ -62,7 +62,7 @@ df_month
 # Считаем показатели для моделей атрибуции Last Click и Data Driven
 df_result_month = df_month.groupby('Group_channel') \
                           .agg({'Last_Click' : 'sum', 'Data_Driven' : 'sum'}) \
-                          .sort_values (by = 'Data_Driven', ascending = False,) \
+                          .sort_values (by = 'Data_Driven', ascending = False) \
                           .round(2)
 
 # Смотрим финальный результат
