@@ -8,7 +8,6 @@ library(RODBC)
 library(odbc)
 library(remotes)
 library(bigrquery)
-library(DBI)
 library(RJDBC)
 
 # Электронная почта, к которой привязан токен
