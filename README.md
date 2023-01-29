@@ -1,2 +1,2 @@
 # About me
-Marketing analyst | BI analyst | Analytics engineer
+Data analyst | BI analyst | Analytics engineer
