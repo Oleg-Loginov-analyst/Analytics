@@ -1,6 +1,3 @@
 # Time Application
 
-Time application consists of the frontend and backend parts
-Frontend is written with help of the Vue.js framework
-Backend is written using Node.js and Express
-Database is MySQL
+Приложение Time состоит из фронтенда и бэкенда. Фронтенд написан с помощью фреймворка Vue.js. Бэкэнд написан с использованием Node.js, а экспресс-база данных — MySQL.
