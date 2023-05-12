@@ -1,5 +1,7 @@
-# Доработка <a href="https://github.com/Oleg-Loginov-analyst/Analytics/blob/main/Python/Python-for-engineers/task-4.py">task-4</a>
+# Доработка task-4.py
+
 # Первая задача - заменить кортеж на список.
+
 # Далее, при помощи циклов нужно обеспечить ввод дополнительных данных.
 
 # Данные можно вводить двумя способами:
