@@ -30,6 +30,6 @@ begin
       id
       ,updated_at desc
   ) as new_records;
-END;
+end;
 $$ language plpgsql
 ;
