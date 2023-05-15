@@ -1,13 +1,13 @@
 -- Создание таблицы
-CREATE TABLE test_data (
-  id INT,
-  rev INT,
-  created_at DATE,
-  updated_at DATE
+create table test_data (
+  id INT
+  ,rev INT
+  ,created_at date
+  ,updated_at date
 );
 
 -- Вставка начальных данных
-INSERT INTO test_data (id, rev, created_at, updated_at) VALUES
+insert into test_data (id, rev, created_at, updated_at) values
 (1, 2, '2020-01-01', '2020-01-01'),
 (1, 4, '2020-01-01', '2020-01-03'),
 (1, 3, '2020-01-01', '2020-01-05'),
