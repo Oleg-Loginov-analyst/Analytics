@@ -1,2 +1,2 @@
 # About me
-Data analyst | BI analyst | Analytics engineer
+Data analyst | Analytics engineer | DevOps engineer
