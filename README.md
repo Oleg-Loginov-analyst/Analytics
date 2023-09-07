@@ -1,2 +1,2 @@
 # About me
-Senior data analyst | Analytics engineer |
+Senior data analyst | Analytics engineer
